@@ -1,0 +1,28 @@
+{
+  // Type-checks everything: the source, the tests, the playground and the Vitest config.
+  // tsconfig.build.json emits only the source into dist/.
+  "compilerOptions": {
+    "target": "es2023",
+    "lib": ["ES2023", "DOM"],
+    // Node's own resolution, so dist/ loads in Node as it is: an app's vite.config.ts imports
+    // ./pwa there, and an app's Vitest loads the package from node_modules without Vite. Relative
+    // imports therefore end in .js.
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "jsx": "react-jsx",
+    "types": ["node"],
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true,
+    "noEmit": true,
+
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src", "playground", "vitest.config.ts"]
+}

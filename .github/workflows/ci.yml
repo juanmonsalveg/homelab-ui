@@ -1,0 +1,27 @@
+# Typecheck, lint, test and build on every push to main and every pull request (README.md §10).
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: jdx/mise-action@v5
+      - run: npm ci
+      - run: npm run check
+      # What would be published: dist/, styles.css, the README, the license and package.json.
+      - run: npm pack --dry-run

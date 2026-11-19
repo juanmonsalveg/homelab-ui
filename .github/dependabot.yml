@@ -1,0 +1,22 @@
+# Weekly update PRs. Nothing is auto-merged: CI has to pass, and someone reviews the diff.
+# Dependabot does not edit mise.toml; keep its node at the version the homelab apps use.
+# The peer dependency ranges in package.json are edited by hand, when a new major is supported.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      npm:
+        patterns:
+          - '*'
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns:
+          - '*'

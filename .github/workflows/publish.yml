@@ -1,0 +1,35 @@
+# Publishes a version to npm when its tag is pushed (README.md §10): bump "version" in
+# package.json, commit, then `git tag v0.2.0 && git push origin v0.2.0`.
+#
+# npm trusted publishing: npmjs.com trusts this repo's publish.yml, so there's no npm token
+# anywhere, and npm adds provenance on its own. It needs npm 11.5.1 or later (Node 26 has it), and
+# package.json's "repository" must name this repo.
+name: Publish
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+  # The OIDC token npm exchanges for a short-lived publish token.
+  id-token: write
+
+jobs:
+  publish:
+    name: publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: jdx/mise-action@v5
+      - name: The tag matches package.json's version
+        run: |
+          version="v$(node -p 'require("./package.json").version')"
+          if [ "$version" != "$GITHUB_REF_NAME" ]; then
+            echo "Tag $GITHUB_REF_NAME doesn't match package.json's $version." >&2
+            exit 1
+          fi
+      - run: npm ci
+      - run: npm run check
+      - run: npm publish

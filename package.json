@@ -1,0 +1,87 @@
+{
+  "name": "@juanchomogi/homelab-ui",
+  "version": "0.1.0",
+  "description": "The shared web layer of the homelab apps behind Authelia: Mantine theme and shell, API client with session-expiry handling, error display, language, PWA options and test helpers.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juanmonsalveg/homelab-ui.git"
+  },
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./pwa": {
+      "types": "./dist/pwa.d.ts",
+      "default": "./dist/pwa.js"
+    },
+    "./test": {
+      "types": "./dist/test.d.ts",
+      "default": "./dist/test.js"
+    },
+    "./styles.css": "./styles.css"
+  },
+  "files": [
+    "dist",
+    "styles.css"
+  ],
+  "scripts": {
+    "dev": "vite --config playground/vite.config.ts",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "oxlint --deny-warnings && prettier --check .",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "npm run typecheck && npm run lint && npm run test && npm run build",
+    "prepack": "npm run build"
+  },
+  "peerDependencies": {
+    "@mantine/core": "^9.8.0",
+    "@tanstack/react-query": "^5.0.0",
+    "@testing-library/react": "^16.0.0",
+    "react": "^19.0.0",
+    "vite-plugin-pwa": "^2.0.0",
+    "vitest": "^5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@testing-library/react": {
+      "optional": true
+    },
+    "vite-plugin-pwa": {
+      "optional": true
+    },
+    "vitest": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@mantine/core": "^9.8.1",
+    "@mantine/hooks": "^9.8.1",
+    "@tanstack/react-query": "^5.107.1",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "jsdom": "^31.0.0",
+    "oxlint": "^1.90.0",
+    "prettier": "^3.9.10",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "typescript": "~7.0.2",
+    "vite": "^8.3.6",
+    "vite-plugin-pwa": "^2.0.0",
+    "vitest": "^5.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

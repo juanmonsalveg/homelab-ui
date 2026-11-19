@@ -1,0 +1,5 @@
+/*
+ * Mantine's styles, inside the `mantine` cascade layer, so any unlayered app CSS overrides them
+ * whatever order the bundle puts the files in (README.md §2). An app imports this once, in main.tsx.
+ */
+@import '@mantine/core/styles.layer.css';
