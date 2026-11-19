@@ -4,7 +4,7 @@ The shared web layer of the homelab apps: React apps that run behind Traefik and
 
 It gives every app the same look and the same behaviour where the homelab demands it. That covers the Mantine theme and app shell, an API client that survives Authelia's session expiring, how errors show up, English and Spanish, the PWA options that keep the login working, and test helpers.
 
-Its backend counterpart is the Go module `homelab-go` (not published yet), whose handlers answer what this package asks for (`/healthz`, `/api/me`, `/api/users`, and errors as `{"error":{"code","message"}}`).
+Its backend counterpart is the Go module [`homelab-go`](https://github.com/juanmonsalveg/homelab-go), whose handlers answer what this package asks for (`/healthz`, `/api/me`, `/api/users`, and errors as `{"error":{"code","message"}}`).
 
 > Code comments cite this file's sections as `README.md §N`. Keep the numbers stable, and add new sections at the end.
 
